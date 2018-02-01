@@ -1,9 +1,9 @@
 import {AsyncStorage} from 'react-native'
 
-export function login(email, password) {
+export function fetchJobs(count) {
   return dispatch => {
     dispatch({
-      type: 'LOGIN_REQUEST'
+      type: 'FETCH_JOBS_REQUEST'
     })
 
     const saveObj = {
@@ -11,31 +11,23 @@ export function login(email, password) {
       password
     }
     console.log(saveObj)
-    fetch('https://goninja.herokuapp.com/login', {
+    fetch(`https://slack.com/api/channels.history?token=xoxp-48492776786-227882252357-309431015910-cf25fe47d61f463e84b6666059ca7985&channel=C1EK2JHD4&count=${count}&pretty=1`, {
       headers: {
         'Content-Type': 'application/json'
       },
-      method: "POST",
+      method: "GET",
       body: JSON.stringify(saveObj)
-    })
-    .then(res => {
-      console.log(res)
-      if (res.ok) {
-        return AsyncStorage.setItem('loginId', res._bodyInit)
-      } else {
-        throw new Error(res._bodyInit.message)
-      }
-      return
     })
     .then(res =>
       dispatch({
-        type: 'LOGIN_SUCCESS'
+        type: 'FETCH_JOBS_SUCCESS',
+	res
       })
     )
     .catch(error => {
       console.log('error', error)
       dispatch({
-        type: 'LOGIN_FAILURE',
+        type: 'FETCH_JOBS_FAILURE',
         error
       })}
     )

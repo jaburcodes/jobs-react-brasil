@@ -1,36 +1,24 @@
 const initialState = {
-  loginIsLoading: false,
-  registerIsLoading: false,
-  isAuth: false
+  jobs: []
 }
 
 const homeRecucer = (state = initialState, action) => {
-  let newState
-  let isCorrect
   switch (action.type) {
 
   //login
-  case 'LOGIN_REQUEST':
-    newState = Object.assign({}, state, {
-      loginIsLoading: true
-    })
-    return newState
+  case 'FETCH_JOBS_REQUEST':
+    return state
 
-  case 'LOGIN_SUCCESS':
-    console.log('isAuth gonna be true')
+  case 'FETCH_JOBS_SUCCESS':
     newState = Object.assign({}, state, {
-      loginIsLoading: false,
-      isAuth: true
+      jobs: action.res
     })
     return newState
 
   case 'LOGIN_FAILURE':
-    newState = Object.assign({}, state, {
-      loginIsLoading: false
-    })
-    return newState
+    return state
 
-    default:
+  default:
     return state
 
   }
