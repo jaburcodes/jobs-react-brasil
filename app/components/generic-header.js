@@ -11,11 +11,6 @@ const Wrapper = styled.View`
   justify-content: center;
   align-items: stretch;
 `
-const HeaderContent = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-`
 
 const HeaderTitle = styled.Text`
   font-size: 32px;
@@ -28,8 +23,8 @@ const HeaderTitle = styled.Text`
 
 const HeaderText = styled.Text`
   font-size: 16px;
-  color: ${props => props.color ? props.color : '#007aff'};
-  ${props => props.left ? 'margin-left: 10px' : 'margin-right: 15px'};
+  color: #007aff;
+  margin-right: 15px;
   font-weight: bold;
   padding-top: 24px;
   padding-bottom: 10px;
@@ -51,15 +46,7 @@ const SearchInput = styled.TextInput`
 
 const GenericHeader = props => (
   <Wrapper>
-    <HeaderContent>
-      <HeaderButton onPress={() => props.onPress()}>
-        <HeaderText left color='gray'>Logout</HeaderText>
-      </HeaderButton>
-      <HeaderTitle>{props.text}</HeaderTitle>
-      <HeaderButton>
-        <HeaderText>Publish</HeaderText>
-      </HeaderButton>
-    </HeaderContent>
+    <HeaderTitle>{props.text}</HeaderTitle>
     <SearchInput placeholder='Search' placeholderTextColor='#8e8e93'/>
   </Wrapper>
 )

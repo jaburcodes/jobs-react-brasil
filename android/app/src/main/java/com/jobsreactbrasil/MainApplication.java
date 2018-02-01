@@ -1,4 +1,4 @@
-package com.goninja;
+package com.jobsreactbrasil;
 
 import android.app.Application;
 

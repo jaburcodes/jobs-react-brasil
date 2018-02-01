@@ -9,33 +9,15 @@ import { connect } from 'react-redux';
 import { store } from './app/redux/store.js';
 import { dispatch } from './app/redux/store.js';
 import { checkAuth } from './app/redux/actions/auth-actions'
-import AuthNavigator from './AuthNavigator'
 import AppNavigator from './AppNavigator'
 
 class App extends Component {
 
-  componentWillMount() {
-    dispatch(checkAuth())
-  }
-
   render() {
-    const {isAuth} = this.props
-    if (isAuth) {
-      return (
-          <AppNavigator />
-      )
-    } else {
-      return (
-          <AuthNavigator />
-      )
-    }
+    return (
+      <AppNavigator />
+    )
   }
 }
 
-const mapStateToProps = state => {
-  return {
-    isAuth: state.isAuth
-  }
-}
-
-export default connect(mapStateToProps)(App)
+export default App

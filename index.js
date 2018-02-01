@@ -16,4 +16,4 @@ const myApp = () => (
       <App />
     </Provider>)
 
-AppRegistry.registerComponent('goNinja', () => myApp);
+AppRegistry.registerComponent('jobsReactBrasil', () => myApp);

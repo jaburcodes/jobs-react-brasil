@@ -1,9 +1,9 @@
 import { createStore, applyMiddleware } from 'redux';
 import thunk from 'redux-thunk';
-import authReducer from './reducers/auth-reducer';
+import homeReducer from './reducers/home-reducer';
 
 export let store = createStore(
-  authReducer,
+  homeReducer,
   applyMiddleware(thunk)
 );
 
