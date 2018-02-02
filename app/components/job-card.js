@@ -6,8 +6,7 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Badges from './badges'
 
 const Wrapper = styled.View`
-  height: 140px;
-  flex: 1;
+  flexGrow: 1;
   background-color: #ffffff;
   flex-direction: row;
   justify-content: flex-start;
@@ -30,15 +29,9 @@ const ContentWrapper = styled.View`
   flex: 1;
   background-color: #ffffff;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
-  border-radius: 20;
-  margin: 15px;
-`
-
-const ContentHead = styled.View`
-  flex: 2;
-  flex-direction: row;
+  overflow: hidden;
   border-radius: 20;
 `
 
@@ -49,26 +42,10 @@ const JobBasicInfos = styled.View`
   border-radius: 20;
 `
 
-const JobTitle = styled.Text`
-  color: #434b52;
-  font-size: 19px;
-`
-
 const CompanyName = styled.Text`
   color: #2f80ed;
   font-size: 14px;
-`
-
-const JobLocationInfos = styled.View`
-  flex: 1;
-  flex-direction: row;
-  justify-content: flex-end;
-  align-items: flex-start;
-`
-
-const JobLocationText = styled.Text`
-  color: #2f80ed;
-  font-size: 12px;
+  padding: 20px;
 `
 
 const ContentSkills = styled.View`
@@ -95,27 +72,10 @@ const BadgesWrapper = styled.View`
 const JobCard = props => (
   <Wrapper>
     <IconWrapper>
-      <Icon name='file' size={38} color='#007aff' />
+      <Icon name='file' size={38} color='#007aff' style={{marginLeft: 10}}/>
     </IconWrapper>
     <ContentWrapper>
-      <ContentHead>
-        <JobBasicInfos>
-          <JobTitle>Front end dev</JobTitle>
-          <CompanyName>Apple</CompanyName>
-        </JobBasicInfos>
-        <JobLocationInfos>
-          <Icon name='map-marker' size={12} color='#2f80ed' />
-          <JobLocationText>Vancouver, CA</JobLocationText>
-        </JobLocationInfos>
-      </ContentHead>
-      <ContentSkills>
-        <SkillsText>Skills</SkillsText>
-        <BadgesWrapper>
-          <Badges
-            skills={['React', 'React-Native', 'Node']}
-          />
-        </BadgesWrapper>
-      </ContentSkills>
+      <CompanyName>{props.job.text}</CompanyName>
     </ContentWrapper>
   </Wrapper>
 )

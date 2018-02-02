@@ -6,26 +6,22 @@ export function fetchJobs(count) {
       type: 'FETCH_JOBS_REQUEST'
     })
 
-    const saveObj = {
-      email,
-      password
-    }
-    console.log(saveObj)
-    fetch(`https://slack.com/api/channels.history?token=xoxp-48492776786-227882252357-309431015910-cf25fe47d61f463e84b6666059ca7985&channel=C1EK2JHD4&count=${count}&pretty=1`, {
+    fetch(`https://slack.com/api/channels.history?token=xoxp-48492776786-227882252357-308641535524-63df13c98710ea3fbee92905d9f6799f&channel=C1EK2JHD4&count=${count}&pretty=1`, {
       headers: {
         'Content-Type': 'application/json'
       },
-      method: "GET",
-      body: JSON.stringify(saveObj)
+      method: "GET"
     })
-    .then(res =>
+    .then(res => {
+      const jobs = JSON.parse(res._bodyInit).messages
+      console.log('action jobs', jobs)
       dispatch({
         type: 'FETCH_JOBS_SUCCESS',
-	res
+	      jobs
       })
-    )
+    })
     .catch(error => {
-      console.log('error', error)
+      console.log()
       dispatch({
         type: 'FETCH_JOBS_FAILURE',
         error

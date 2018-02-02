@@ -5,9 +5,10 @@ import GenericHeader from '../components/generic-header'
 import JobCard from '../components/job-card'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
+import { fetchJobs } from '../redux/actions/home-actions'
 
 const Wrapper = styled.View`
-  flex: 1;
+  flexGrow: 1;
   justify-content: flex-start;
   background-color: #ffffff;
 `
@@ -18,23 +19,57 @@ class Home extends React.Component {
     header: <GenericHeader text='ReactBrasil'/>
   };
 
+  constructor(props) {
+    super(props)
+    this.state = {
+      jobs: [],
+      index: 10,
+      refreshing: false
+    }
+  }
+
+  componentDidMount() {
+    dispatch(fetchJobs(this.state.index))
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {jobs, refreshing} = this.props
+    if (jobs !== nextProps.jobs){
+      this.setState({jobs: nextProps.jobs})
+    }
+    if (refreshing !== nextProps.refreshing){
+      this.setState({refreshing: nextProps.refreshing})
+    }
+  }
+
+  handleFlatListRefresh() {
+    this.setState({refreshing: true})
+    dispatch(fetchJobs(20))
+  }
+
+  handleEndReached() {
+    this.setState({index: this.state.index+10})
+    dispatch(fetchJobs(this.state.index))
+  }
+
   render() {
-    const { navigate } = this.props.navigation
+    const { navigate, jobs, refreshing } = this.props.navigation
+    console.log(jobs)
     return(
-      <Wrapper>
         <FlatList
           style={{backgroundColor: '#ffffff'}}
-          data={[{key: 'a'}, {key: 'b'}, {key: 'c'}, {key: 'd'}, {key: 'e'}, {key: 'f'}]}
-          renderItem={({item}) => <JobCard />}
+          data={this.state.jobs}
+          renderItem={({item}) => <JobCard key={item.key} job={item}/>}
+          onEndReached={() => this.handleEndReached()}
         />
-      </Wrapper>
     )
   }
 }
 
 const mapStateToProps = state => {
   return {
-    loginIsLoading: state.loginIsLoading
+    jobs: state.jobs,
+    refreshing: state.refreshing
   }
 }
 

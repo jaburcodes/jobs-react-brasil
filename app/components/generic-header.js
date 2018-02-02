@@ -19,6 +19,7 @@ const HeaderTitle = styled.Text`
   font-weight: bold;
   padding-top: 15px;
   padding-bottom: 10px;
+  margin-left: 10px;
 `
 
 const HeaderText = styled.Text`
