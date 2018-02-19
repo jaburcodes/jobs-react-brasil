@@ -1,14 +1,16 @@
 import React from 'react';
-import { TextInput } from 'react-native'
+import { TextInput, Image } from 'react-native'
+import {fetchUser} from '../redux/actions/home-actions'
 import styled from 'styled-components/native'
 import theme from '../utils/theme'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 import Badges from './badges'
+import { dispatch } from '../redux/store'
 
 const Wrapper = styled.View`
   flexGrow: 1;
   background-color: #ffffff;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: flex-start;
   align-items: stretch;
   margin: 10px;
@@ -23,9 +25,11 @@ const Wrapper = styled.View`
 `
 
 const IconWrapper = styled.View`
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: flex-start;
   align-items: center;
+  margin-top: 15px;
+  margin-left: 20px;
 `
 
 const ContentWrapper = styled.View`
@@ -71,16 +75,40 @@ const BadgesWrapper = styled.View`
   flex-direction: row;
 `
 
+const UserImage = styled.Image`
+  height: 38px;
+  width: 38px;
+  border-radius: 20;
+`
 
-const JobCard = props => (
-  <Wrapper>
-    <IconWrapper>
-      <Icon name='file' size={38} color='#007aff' style={{marginLeft: 10}}/>
-    </IconWrapper>
-    <ContentWrapper>
-      <CompanyName>{props.job.text}</CompanyName>
-    </ContentWrapper>
-  </Wrapper>
-)
+const UserName = styled.Text`
+  color: black;
+  font-size: 18px;
+  font-weight: 700;
+  margin-left: 10px;
+`
+
+
+class JobCard extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    const {job} = this.props
+  }
+
+  render(){
+    const {job, users, userKey} = this.props
+    return (
+      <Wrapper>
+        <IconWrapper>
+          <UserImage
+          source={{uri: users && users[userKey] && users[userKey].image_72}}/>
+          <UserName>{users && users[userKey] && users[userKey].real_name}</UserName>
+        </IconWrapper>
+        <ContentWrapper>
+          <CompanyName>{job.text}</CompanyName>
+        </ContentWrapper>
+      </Wrapper>
+    )
+  }
+}
 
 export default JobCard

@@ -1,6 +1,7 @@
 const initialState = {
   jobs: [],
-  refreshing: false
+  refreshing: false,
+  users: []
 }
 
 const homeRecucer = (state = initialState, action) => {
@@ -14,16 +15,25 @@ const homeRecucer = (state = initialState, action) => {
     return newState
 
   case 'FETCH_JOBS_SUCCESS':
-    console.log('FETCH_JOBS_SUCCESS', action.jobs)
-    let key = 0
+    let key = -1
     const jobs = action.jobs.filter(job => ((job.reactions) && (job.reactions[0].name === 'calling') && (job.reactions[0].users.includes('U6PRY7EAH'))))
+    .map(job => {
+      key++
+      return Object.assign(job, {}, {key})
+    })
 
-    console.log('map jobs', jobs)
     newState = Object.assign({}, state, {
       jobs,
       refreshing: false
     })
-    console.log('newState', newState)
+    return newState
+
+  case 'FETCH_USER_SUCCESS':
+    const users = action.users
+
+    newState = Object.assign({}, state, {
+      users
+    })
     return newState
 
   case 'LOGIN_FAILURE':
@@ -36,16 +46,3 @@ const homeRecucer = (state = initialState, action) => {
 }
 
 export default homeRecucer
-/*
-[REMOTE] [FRONTEND DEV] [CALIFORNIA]
-
-Hey! This is a test job post!!
-
-Hey! This is a test job post!!
-
-Hey! This is a test job post!!
-
-react-brasil #Jobs app is coming!! :stuck_out_tongue:
-
-This is our company link, please, apply:  https://google.com (gonna add a link preview)
-*/

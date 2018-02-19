@@ -5,7 +5,7 @@ import GenericHeader from '../components/generic-header'
 import JobCard from '../components/job-card'
 import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
-import { fetchJobs } from '../redux/actions/home-actions'
+import { fetchJobs, fetchUsers } from '../redux/actions/home-actions'
 
 class Home extends React.Component {
 
@@ -18,7 +18,8 @@ class Home extends React.Component {
     this.state = {
       jobs: [],
       index: 100,
-      refreshing: false
+      refreshing: false,
+      users: []
     }
   }
 
@@ -27,12 +28,19 @@ class Home extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const {jobs, refreshing} = this.props
+    const {jobs, refreshing, users} = this.props
     if (jobs !== nextProps.jobs){
       this.setState({jobs: nextProps.jobs})
+      const users = nextProps.jobs.map(job => job.user)
+      dispatch(fetchUsers(users))
     }
+
     if (refreshing !== nextProps.refreshing){
       this.setState({refreshing: nextProps.refreshing})
+    }
+
+    if (users !== nextProps.users){
+      this.setState({users: nextProps.users})
     }
   }
 
@@ -48,12 +56,12 @@ class Home extends React.Component {
 
   render() {
     const { navigate, jobs, refreshing } = this.props.navigation
-    console.log('jobs', jobs)
+    console.log('jobs', this.state.jobs)
     return(
         <FlatList
           style={{backgroundColor: '#ffffff'}}
           data={this.state.jobs}
-          renderItem={({item}) => <JobCard key={item.key} job={item}/>}
+          renderItem={({item}) => <JobCard key={item.key} job={item} users={this.state.users} userKey={item.key} />}
           onEndReached={() => this.handleEndReached()}
           refreshing={this.state.refreshing}
           onRefresh={() => this.handleFlatListRefresh()}
@@ -65,7 +73,8 @@ class Home extends React.Component {
 const mapStateToProps = state => {
   return {
     jobs: state.jobs,
-    refreshing: state.refreshing
+    refreshing: state.refreshing,
+    users: state.users
   }
 }
 
