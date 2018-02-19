@@ -46,7 +46,6 @@ export function fetchUsers(users) {
     Promise.all(newUsers)
     .then(res => {
       console.log('promise all res', res)
-      
       let users = []
       res.map(response => {
         users = [...users, JSON.parse(response._bodyInit).profile]

@@ -16,7 +16,7 @@ const homeRecucer = (state = initialState, action) => {
 
   case 'FETCH_JOBS_SUCCESS':
     let key = -1
-    const jobs = action.jobs.filter(job => ((job.reactions) && (job.reactions[0].name === 'calling') && (job.reactions[0].users.includes('U6PRY7EAH'))))
+    const jobs = action.jobs.filter(job => ((job.reactions) && (job.reactions[0].name === 'calling') && (job.reactions[0].users.includes('U6PRY7EAH') || job.reactions[0].users.includes('U5SD6F1UY'))))
     .map(job => {
       key++
       return Object.assign(job, {}, {key})

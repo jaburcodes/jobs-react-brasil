@@ -58,14 +58,16 @@ class Home extends React.Component {
     const { navigate, jobs, refreshing } = this.props.navigation
     console.log('jobs', this.state.jobs)
     return(
-        <FlatList
+      <View
           style={{backgroundColor: '#ffffff'}}
+      >
+        <FlatList
+          style={{backgroundColor: '#ffffff', opacity: 1}}
           data={this.state.jobs}
           renderItem={({item}) => <JobCard key={item.key} job={item} users={this.state.users} userKey={item.key} />}
           onEndReached={() => this.handleEndReached()}
-          refreshing={this.state.refreshing}
-          onRefresh={() => this.handleFlatListRefresh()}
         />
+      </View>
     )
   }
 }

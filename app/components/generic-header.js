@@ -5,7 +5,7 @@ import theme from '../utils/theme'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Wrapper = styled.View`
-  height: 110px;
+  height: 80px;
   background-color: #ffffff;
   flex-direction: column;
   justify-content: center;
@@ -14,11 +14,9 @@ const Wrapper = styled.View`
 
 const HeaderTitle = styled.Text`
   font-size: 32px;
-  color: #ffffff;
   color: black;
   font-weight: bold;
   padding-top: 15px;
-  padding-bottom: 10px;
   margin-left: 10px;
 `
 
@@ -48,7 +46,6 @@ const SearchInput = styled.TextInput`
 const GenericHeader = props => (
   <Wrapper>
     <HeaderTitle>{props.text}</HeaderTitle>
-    <SearchInput placeholder='Search' placeholderTextColor='#8e8e93'/>
   </Wrapper>
 )
 
