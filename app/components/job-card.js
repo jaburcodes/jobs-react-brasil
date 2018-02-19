@@ -12,11 +12,14 @@ const Wrapper = styled.View`
   justify-content: flex-start;
   align-items: stretch;
   margin: 10px;
-  border-radius: 20;
+  border-bottom-left-radius: 20;
+  border-bottom-right-radius: 20;
   shadow-offset: { width: 0, height: 0 };
   shadow-opacity: 0.15;
   shadow-radius: 20;
   elevation: 1;
+  border-top-width: 4px;
+  border-top-color: blue;
 `
 
 const IconWrapper = styled.View`

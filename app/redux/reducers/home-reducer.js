@@ -16,12 +16,9 @@ const homeRecucer = (state = initialState, action) => {
   case 'FETCH_JOBS_SUCCESS':
     console.log('FETCH_JOBS_SUCCESS', action.jobs)
     let key = 0
-    const jobs = action.jobs.filter(job => ((job.subtype !== 'channel_join') && (job.text.startsWith('a')))).map(job => {
-      key += 1
-      return Object.assign({}, job, {
-        key
-      })
-    })
+    const jobs = action.jobs.filter(job => ((job.reactions) && (job.reactions[0].name === 'calling') && (job.reactions[0].users.includes('U6PRY7EAH'))))
+
+    console.log('map jobs', jobs)
     newState = Object.assign({}, state, {
       jobs,
       refreshing: false

@@ -7,12 +7,6 @@ import { connect } from 'react-redux'
 import { dispatch } from '../redux/store'
 import { fetchJobs } from '../redux/actions/home-actions'
 
-const Wrapper = styled.View`
-  flexGrow: 1;
-  justify-content: flex-start;
-  background-color: #ffffff;
-`
-
 class Home extends React.Component {
 
   static navigationOptions = {
@@ -54,7 +48,7 @@ class Home extends React.Component {
 
   render() {
     const { navigate, jobs, refreshing } = this.props.navigation
-    console.log(jobs)
+    console.log('jobs', jobs)
     return(
         <FlatList
           style={{backgroundColor: '#ffffff'}}
