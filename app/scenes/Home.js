@@ -23,7 +23,7 @@ class Home extends React.Component {
     super(props)
     this.state = {
       jobs: [],
-      index: 10,
+      index: 100,
       refreshing: false
     }
   }
@@ -44,11 +44,11 @@ class Home extends React.Component {
 
   handleFlatListRefresh() {
     this.setState({refreshing: true})
-    dispatch(fetchJobs(20))
+    dispatch(fetchJobs(100))
   }
 
   handleEndReached() {
-    this.setState({index: this.state.index+10})
+    this.setState({index: this.state.index + 100})
     dispatch(fetchJobs(this.state.index))
   }
 
@@ -61,6 +61,8 @@ class Home extends React.Component {
           data={this.state.jobs}
           renderItem={({item}) => <JobCard key={item.key} job={item}/>}
           onEndReached={() => this.handleEndReached()}
+          refreshing={this.state.refreshing}
+          onRefresh={() => this.handleFlatListRefresh()}
         />
     )
   }

@@ -16,7 +16,7 @@ const homeRecucer = (state = initialState, action) => {
   case 'FETCH_JOBS_SUCCESS':
     console.log('FETCH_JOBS_SUCCESS', action.jobs)
     let key = 0
-    const jobs = action.jobs.filter(job => job.subtype !== 'channel_join').map(job => {
+    const jobs = action.jobs.filter(job => ((job.subtype !== 'channel_join') && (job.text.startsWith('a')))).map(job => {
       key += 1
       return Object.assign({}, job, {
         key
@@ -39,3 +39,16 @@ const homeRecucer = (state = initialState, action) => {
 }
 
 export default homeRecucer
+/*
+[REMOTE] [FRONTEND DEV] [CALIFORNIA]
+
+Hey! This is a test job post!!
+
+Hey! This is a test job post!!
+
+Hey! This is a test job post!!
+
+react-brasil #Jobs app is coming!! :stuck_out_tongue:
+
+This is our company link, please, apply:  https://google.com (gonna add a link preview)
+*/
