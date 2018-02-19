@@ -1,5 +1,5 @@
 import React from 'react';
-import { TextInput, Image } from 'react-native'
+import { TextInput, Image, Linking, Text, View } from 'react-native'
 import {fetchUser} from '../redux/actions/home-actions'
 import styled from 'styled-components/native'
 import theme from '../utils/theme'
@@ -34,12 +34,14 @@ const IconWrapper = styled.View`
 
 const ContentWrapper = styled.View`
   flex: 1;
+  flex-wrap: wrap;
   background-color: #ffffff;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   overflow: hidden;
   border-radius: 20;
+  padding: 20px;
 `
 
 const JobBasicInfos = styled.View`
@@ -52,7 +54,17 @@ const JobBasicInfos = styled.View`
 const CompanyName = styled.Text`
   color: #2f80ed;
   font-size: 14px;
-  padding: 20px;
+`
+
+const Link = styled.Text`
+  color: #2f80ed;
+  font-size: 14px;
+  font-weight: 700;
+`
+
+const CompanyNameLink = styled.TouchableOpacity`
+  color: #2f80ed;
+  font-size: 14px;
 `
 
 const ContentSkills = styled.View`
@@ -94,8 +106,44 @@ class JobCard extends React.Component {
     const {job} = this.props
   }
 
+  handleClick(url) {
+    Linking.canOpenURL(url).then(supported => {
+      if (supported) {
+        Linking.openURL(url);
+      } else {
+        console.log("Don't know how to open URI: " + url)
+      }
+    })
+  }
+
   render(){
     const {job, users, userKey} = this.props
+
+    let jobText = job.text
+
+    if (jobText.search('<') > - 1) {
+
+      jobText = jobText.split('<')
+      jobTextEl = jobText.map(text => {
+        if (text.search('>') !== - 1) {
+          newText = text.split('>')
+          const link = newText[0].split('|')[0]
+          const simpleText = newText[1]
+          return (
+            <View>
+              <CompanyNameLink onPress={() => this.handleClick(link)}><Link>{link}</Link></CompanyNameLink>
+              <CompanyName>{simpleText}</CompanyName>
+            </View>
+          )
+        } else {
+          return (<CompanyName>{text}</CompanyName>)
+        }
+      })
+    } else {
+      jobTextEl = (<CompanyName>{job.text}</CompanyName>)
+    }
+
+
     return (
       <Wrapper>
         <IconWrapper>
@@ -104,7 +152,7 @@ class JobCard extends React.Component {
           <UserName>{users && users[userKey] && users[userKey].real_name}</UserName>
         </IconWrapper>
         <ContentWrapper>
-          <CompanyName>{job.text}</CompanyName>
+          {jobTextEl}
         </ContentWrapper>
       </Wrapper>
     )

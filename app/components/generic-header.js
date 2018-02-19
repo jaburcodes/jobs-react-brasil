@@ -6,10 +6,10 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons'
 
 const Wrapper = styled.View`
   height: 80px;
-  background-color: #ffffff;
+  background-color: #F1F1F1;
   flex-direction: column;
   justify-content: center;
-  align-items: stretch;
+  align-items: center;
 `
 
 const HeaderTitle = styled.Text`

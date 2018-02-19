@@ -1,12 +1,12 @@
 import {AsyncStorage} from 'react-native'
-
+import { slackToken } from '../../config'
 export function fetchJobs(count) {
   return dispatch => {
     dispatch({
       type: 'FETCH_JOBS_REQUEST'
     })
 
-    fetch(`https://slack.com/api/channels.history?token=xoxp-48492776786-227882252357-316707862848-e243e12e54fa09eeb34152cced2d9822&channel=C1EK2JHD4&count=${count}&pretty=1`, {
+    fetch(`https://slack.com/api/channels.history?token=${slackToken}&channel=C1EK2JHD4&count=${count}&pretty=1`, {
       headers: {
         'Content-Type': 'application/json'
       },
@@ -36,7 +36,7 @@ export function fetchUsers(users) {
     })
 
     const newUsers = users.map(user => {
-      return fetch(`https://slack.com/api/users.profile.get?token=xoxp-48492776786-227882252357-316707862848-e243e12e54fa09eeb34152cced2d9822&user=${user}&pretty=1`, {
+      return fetch(`https://slack.com/api/users.profile.get?token=${slackToken}&user=${user}&pretty=1`, {
         headers: {
           'Content-Type': 'application/json'
         },
