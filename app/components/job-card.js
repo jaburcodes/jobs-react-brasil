@@ -52,7 +52,7 @@ const JobBasicInfos = styled.View`
 `
 
 const CompanyName = styled.Text`
-  color: #2f80ed;
+  color: black;
   font-size: 14px;
 `
 

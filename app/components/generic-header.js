@@ -10,6 +10,10 @@ const Wrapper = styled.View`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  shadow-offset: { width: 0, height: 0 };
+  shadow-opacity: 0.15;
+  shadow-radius: 20;
+  elevation: 1;
 `
 
 const HeaderTitle = styled.Text`
