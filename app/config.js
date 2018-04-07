@@ -1,1 +1,1 @@
-export const slackToken = ''
+export const slackToken = 'xoxp-48492776786-227882252357-317450206579-ee4a8a14385f68beb2311f6a6c725345'

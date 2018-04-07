@@ -117,7 +117,6 @@ class JobCard extends React.Component {
   }
 
   render(){
-    const {job, users, userKey} = this.props
 
     let jobText = job.text
 
