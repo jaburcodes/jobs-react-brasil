@@ -30,7 +30,7 @@
     "babel-jest": "22.0.6",
     "babel-preset-react-native": "4.0.0",
     "jest": "22.0.6",
-    "react-test-renderer": "16.2.0"
+    "react-test-renderer": "16.13.0"
   },
   "jest": {
     "preset": "react-native"
