@@ -15,7 +15,7 @@
     "ios:clear": "cd ios && rm -rf build"
   },
   "dependencies": {
-    "entities": "^1.1.1",
+    "entities": "^2.2.0",
     "react": "16.2.0",
     "react-native": "0.52.0",
     "react-native-animatable": "^1.2.4",
